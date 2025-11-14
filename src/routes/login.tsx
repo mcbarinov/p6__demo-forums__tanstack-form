@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { type } from "arktype"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
@@ -9,12 +10,10 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import { api } from "@/lib/api"
 import { AppError } from "@/lib/errors"
 
-const loginSearchSchema = z.object({
-  redirect: z.string().optional(),
-})
-
 export const Route = createFileRoute("/login")({
-  validateSearch: loginSearchSchema,
+  validateSearch: type({
+    redirect: "string?",
+  }),
   component: RouteComponent,
 })
 

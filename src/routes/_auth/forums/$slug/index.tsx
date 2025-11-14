@@ -1,19 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { z } from "zod"
+import { type } from "arktype"
 import { api } from "@/lib/api"
 import { useForum } from "@/hooks/useCache"
 import { Button } from "@/components/ui/button"
 import { Paginator } from "./-components/Paginator"
 import { PostsTable } from "./-components/PostsTable"
 
-const searchSchema = z.object({
-  page: z.number().optional(),
-  pageSize: z.number().optional(),
-})
-
 export const Route = createFileRoute("/_auth/forums/$slug/")({
-  validateSearch: searchSchema,
+  validateSearch: type({
+    page: "number?",
+    pageSize: "number?",
+  }),
   loaderDeps: ({ search }) => ({
     page: search.page,
     pageSize: search.pageSize,
