@@ -1,3 +1,12 @@
+## ⚠️ IMPORTANT
+
+This repository is cloned from [p4**demo-forums**tanstack-router](https://github.com/mcbarinov/p4__demo-forums__tanstack-router).
+
+The goal of this repository is to implement the same functionality using different libraries:
+
+- **TanStack Form** instead of React Hook Form for form handling
+- **ArkType** instead of Zod for schema validation
+
 # Demo Forums - TanStack Router
 
 Demo project for developing and testing good architectural approaches for future projects.
@@ -204,6 +213,7 @@ import type { User, Forum, Post } from "@/types"
 
 ## Related Projects
 
+- **Original Project**: [p4**demo-forums**tanstack-router](https://github.com/mcbarinov/p4__demo-forums__tanstack-router) - TanStack Router version with React Hook Form and Zod
 - **Backend API**: [p1**demo-forums**api](https://github.com/mcbarinov/p1__demo-forums__api) - FastAPI backend with in-memory storage
 - **React Router Version**: [p2**demo-forums**react-router](https://github.com/mcbarinov/p2__demo-forums__react-router) - Same app built with React Router instead of TanStack Router
 

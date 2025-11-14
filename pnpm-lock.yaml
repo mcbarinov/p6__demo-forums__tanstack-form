@@ -28,6 +28,12 @@ importers:
       "@tailwindcss/vite":
         specifier: ^4.1.17
         version: 4.1.17(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6))
+      "@tanstack/react-form":
+        specifier: ^1.25.0
+        version: 1.25.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      "@tanstack/react-form-devtools":
+        specifier: ^0.2.1
+        version: 0.2.1(@types/react@19.2.4)(csstype@3.2.0)(react@19.2.0)(solid-js@1.9.10)
       "@tanstack/react-query":
         specifier: ^5.90.9
         version: 5.90.9(react@19.2.0)
@@ -37,6 +43,9 @@ importers:
       "@tanstack/react-router-devtools":
         specifier: ^1.136.1
         version: 1.136.1(@tanstack/react-router@1.136.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@tanstack/router-core@1.136.1)(@types/node@24.10.1)(csstype@3.2.0)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(solid-js@1.9.10)(tsx@4.20.6)
+      arktype:
+        specifier: ^2.1.26
+        version: 2.1.26
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -139,6 +148,15 @@ importers:
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)
 
 packages:
+  "@ark/schema@0.54.0":
+    resolution: { integrity: sha512-QloFou+ODfb5qXgPxX1EbJyRqZEwoElzvJ6VuuFVvWJQGoigBEUW3L0HejXG/B9v8K3VvDikuULp5ELSwZn8hg== }
+
+  "@ark/util@0.53.0":
+    resolution: { integrity: sha512-TGn4gLlA6dJcQiqrtCtd88JhGb2XBHo6qIejsDre+nxpGuUVW4G3YZGVrwjNBTO0EyR+ykzIo4joHJzOj+/cpA== }
+
+  "@ark/util@0.54.0":
+    resolution: { integrity: sha512-ugTfpEDGA6d2uU2/3M7uRiuPNYckQMhg2wfNMw8zZHXjPhuVCbXWZzIcBojuXuCN8j4MrNWNqQ9z7f8W/JiE8w== }
+
   "@babel/code-frame@7.27.1":
     resolution: { integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg== }
     engines: { node: ">=6.9.0" }
@@ -1126,20 +1144,71 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7
 
+  "@tanstack/devtools-event-client@0.3.5":
+    resolution: { integrity: sha512-RL1f5ZlfZMpghrCIdzl6mLOFLTuhqmPNblZgBaeKfdtk5rfbjykurv+VfYydOFXj0vxVIoA2d/zT7xfD7Ph8fw== }
+    engines: { node: ">=18" }
+
+  "@tanstack/devtools-ui@0.4.4":
+    resolution: { integrity: sha512-5xHXFyX3nom0UaNfiOM92o6ziaHjGo3mcSGe2HD5Xs8dWRZNpdZ0Smd0B9ddEhy0oB+gXyMzZgUJb9DmrZV0Mg== }
+    engines: { node: ">=18" }
+    peerDependencies:
+      solid-js: ">=1.9.7"
+
+  "@tanstack/devtools-utils@0.0.4":
+    resolution: { integrity: sha512-oEZzBQqX6V9oTmDAj6W45iGDRbCO3B/UMTqwktTaagCPDUDRTDFBVUcdYs+QXVNaE6JQ/jDHmIHig/5bG4ot5g== }
+    engines: { node: ">=18" }
+    peerDependencies:
+      "@types/react": ">=19.0.0"
+      react: ">=19.0.0"
+      solid-js: ">=1.9.7"
+    peerDependenciesMeta:
+      "@types/react":
+        optional: true
+      react:
+        optional: true
+      solid-js:
+        optional: true
+
   "@tanstack/eslint-plugin-query@5.91.2":
     resolution: { integrity: sha512-UPeWKl/Acu1IuuHJlsN+eITUHqAaa9/04geHHPedY8siVarSaWprY0SVMKrkpKfk5ehRT7+/MZ5QwWuEtkWrFw== }
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
 
+  "@tanstack/form-core@1.25.0":
+    resolution: { integrity: sha512-OEWW2uTOFMyRmHrVEiPOn+J27ekQ/vXwRAJt9kD8U8vCt8CmpClj989OOGGSBSVJtDNxGUcWyKF8gYznnqIyaw== }
+
+  "@tanstack/form-devtools@0.2.1":
+    resolution: { integrity: sha512-cNU9XP5JZ1sTTedLB3N8tR/vGpi9cj6GfVD44igXgNd9J6Iag15juYRh0l8+/THEHpSzqyCcVHNCOULstsCrlw== }
+    peerDependencies:
+      solid-js: ">=1.9.9"
+
   "@tanstack/history@1.133.28":
     resolution: { integrity: sha512-B7+x7eP2FFvi3fgd3rNH9o/Eixt+pp0zCIdGhnQbAJjFrlwIKGjGnwyJjhWJ5fMQlGks/E2LdDTqEV4W9Plx7g== }
     engines: { node: ">=12" }
+
+  "@tanstack/pacer@0.15.4":
+    resolution: { integrity: sha512-vGY+CWsFZeac3dELgB6UZ4c7OacwsLb8hvL2gLS6hTgy8Fl0Bm/aLokHaeDIP+q9F9HUZTnp360z9uv78eg8pg== }
+    engines: { node: ">=18" }
 
   "@tanstack/query-core@5.90.9":
     resolution: { integrity: sha512-UFOCQzi6pRGeVTVlPNwNdnAvT35zugcIydqjvFUzG62dvz2iVjElmNp/hJkUoM5eqbUPfSU/GJIr/wbvD8bTUw== }
 
   "@tanstack/query-devtools@5.90.1":
     resolution: { integrity: sha512-GtINOPjPUH0OegJExZ70UahT9ykmAhmtNVcmtdnOZbxLwT7R5OmRztR5Ahe3/Cu7LArEmR6/588tAycuaWb1xQ== }
+
+  "@tanstack/react-form-devtools@0.2.1":
+    resolution: { integrity: sha512-8jK054U5bBZcSoNIuk9aTanu2VLYRqC6T9TvY3j7V5ZYkaj2lDj6QvSjmP2EdMkiK0hs/4mlVjXeA8fTGywhOg== }
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  "@tanstack/react-form@1.25.0":
+    resolution: { integrity: sha512-SjKpBkjegNVW9WU+qlO8+/+kSbSEwo2zwHnrQz/yOnnJRhtdgubUt50LfeUtdzkMsbbptQ5MSZrXH03kidQjyw== }
+    peerDependencies:
+      "@tanstack/react-start": "*"
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      "@tanstack/react-start":
+        optional: true
 
   "@tanstack/react-query-devtools@5.90.2":
     resolution: { integrity: sha512-vAXJzZuBXtCQtrY3F/yUNJCV4obT/A/n81kb3+YqLbro5Z2+phdAbceO+deU3ywPw8B42oyJlp4FhO0SoivDFQ== }
@@ -1170,6 +1239,12 @@ packages:
     peerDependencies:
       react: ">=18.0.0 || >=19.0.0"
       react-dom: ">=18.0.0 || >=19.0.0"
+
+  "@tanstack/react-store@0.7.7":
+    resolution: { integrity: sha512-qqT0ufegFRDGSof9D/VqaZgjNgp4tRPHZIJq2+QIHkMUtHjaJ0lYrrXjeIUJvjnTbgPfSD1XgOMEt0lmANn6Zg== }
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   "@tanstack/react-store@0.8.0":
     resolution: { integrity: sha512-1vG9beLIuB7q69skxK9r5xiLN3ztzIPfSQSs0GfeqWGO2tGIyInZx0x1COhpx97RKaONSoAb8C3dxacWksm1ow== }
@@ -1220,6 +1295,9 @@ packages:
   "@tanstack/router-utils@1.133.19":
     resolution: { integrity: sha512-WEp5D2gPxvlLDRXwD/fV7RXjYtqaqJNXKB/L6OyZEbT+9BG/Ib2d7oG9GSUZNNMGPGYAlhBUOi3xutySsk6rxA== }
     engines: { node: ">=12" }
+
+  "@tanstack/store@0.7.7":
+    resolution: { integrity: sha512-xa6pTan1bcaqYDS9BDpSiS63qa6EoDkPN9RsRaxHuDdVDNntzq3xNwR5YKTU/V3SkSyC9T4YVOPh2zRQN0nhIQ== }
 
   "@tanstack/store@0.8.0":
     resolution: { integrity: sha512-Om+BO0YfMZe//X2z0uLF2j+75nQga6TpTJgLJQBiq85aOyZNIhkCgleNcud2KQg4k4v9Y9l+Uhru3qWMPGTOzQ== }
@@ -1362,6 +1440,12 @@ packages:
     resolution: { integrity: sha512-ik3ZgC9dY/lYVVM++OISsaYDeg1tb0VtP5uL3ouh1koGOaUMDPpbFIei4JkFimWUFPn90sbMNMXQAIVOlnYKJA== }
     engines: { node: ">=10" }
 
+  arkregex@0.0.2:
+    resolution: { integrity: sha512-ttjDUICBVoXD/m8bf7eOjx8XMR6yIT2FmmW9vsN0FCcFOygEZvvIX8zK98tTdXkzi0LkRi5CmadB44jFEIyDNA== }
+
+  arktype@2.1.26:
+    resolution: { integrity: sha512-zDwukKV6uTElKCAbIoQ9OU6shXE5ALjvZAqHErOSv6l0iLKlubELZ7AcevYLaWFYr5rmIN4Uv9+dIzInktSO1A== }
+
   ast-types@0.16.1:
     resolution: { integrity: sha512-6t10qk83GOG8p0vKmaCr8eiilZwO171AvbROMtvvNiwrTly62t+7XkA8RdIIVbpMhCASAsxgAzdRSwh6nw/5Dg== }
     engines: { node: ">=4" }
@@ -1451,6 +1535,9 @@ packages:
 
   csstype@3.2.0:
     resolution: { integrity: sha512-si++xzRAY9iPp60roQiFta7OFbhrgvcthrhlNAGeQptSY25uJjkfUV8OArC3KLocB8JT8ohz+qgxWCmz8RhjIg== }
+
+  dayjs@1.11.19:
+    resolution: { integrity: sha512-t5EcLVS6QPBNqM2z8fakk/NKel+Xzshgt8FFKAn+qwlD1pzZWxh0nVCrvFK7ZDb6XucZeF9z8C7CBWTRIVApAw== }
 
   debug@4.4.3:
     resolution: { integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA== }
@@ -2312,6 +2399,14 @@ packages:
     resolution: { integrity: sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ== }
 
 snapshots:
+  "@ark/schema@0.54.0":
+    dependencies:
+      "@ark/util": 0.54.0
+
+  "@ark/util@0.53.0": {}
+
+  "@ark/util@0.54.0": {}
+
   "@babel/code-frame@7.27.1":
     dependencies:
       "@babel/helper-validator-identifier": 7.28.5
@@ -3244,6 +3339,26 @@ snapshots:
       tailwindcss: 4.1.17
       vite: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)
 
+  "@tanstack/devtools-event-client@0.3.5": {}
+
+  "@tanstack/devtools-ui@0.4.4(csstype@3.2.0)(solid-js@1.9.10)":
+    dependencies:
+      clsx: 2.1.1
+      goober: 2.1.18(csstype@3.2.0)
+      solid-js: 1.9.10
+    transitivePeerDependencies:
+      - csstype
+
+  "@tanstack/devtools-utils@0.0.4(@types/react@19.2.4)(csstype@3.2.0)(react@19.2.0)(solid-js@1.9.10)":
+    dependencies:
+      "@tanstack/devtools-ui": 0.4.4(csstype@3.2.0)(solid-js@1.9.10)
+    optionalDependencies:
+      "@types/react": 19.2.4
+      react: 19.2.0
+      solid-js: 1.9.10
+    transitivePeerDependencies:
+      - csstype
+
   "@tanstack/eslint-plugin-query@5.91.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)":
     dependencies:
       "@typescript-eslint/utils": 8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
@@ -3252,11 +3367,54 @@ snapshots:
       - supports-color
       - typescript
 
+  "@tanstack/form-core@1.25.0":
+    dependencies:
+      "@tanstack/devtools-event-client": 0.3.5
+      "@tanstack/pacer": 0.15.4
+      "@tanstack/store": 0.7.7
+
+  "@tanstack/form-devtools@0.2.1(@types/react@19.2.4)(csstype@3.2.0)(react@19.2.0)(solid-js@1.9.10)":
+    dependencies:
+      "@tanstack/devtools-ui": 0.4.4(csstype@3.2.0)(solid-js@1.9.10)
+      "@tanstack/devtools-utils": 0.0.4(@types/react@19.2.4)(csstype@3.2.0)(react@19.2.0)(solid-js@1.9.10)
+      "@tanstack/form-core": 1.25.0
+      clsx: 2.1.1
+      dayjs: 1.11.19
+      goober: 2.1.18(csstype@3.2.0)
+      solid-js: 1.9.10
+    transitivePeerDependencies:
+      - "@types/react"
+      - csstype
+      - react
+
   "@tanstack/history@1.133.28": {}
+
+  "@tanstack/pacer@0.15.4":
+    dependencies:
+      "@tanstack/devtools-event-client": 0.3.5
+      "@tanstack/store": 0.7.7
 
   "@tanstack/query-core@5.90.9": {}
 
   "@tanstack/query-devtools@5.90.1": {}
+
+  "@tanstack/react-form-devtools@0.2.1(@types/react@19.2.4)(csstype@3.2.0)(react@19.2.0)(solid-js@1.9.10)":
+    dependencies:
+      "@tanstack/devtools-utils": 0.0.4(@types/react@19.2.4)(csstype@3.2.0)(react@19.2.0)(solid-js@1.9.10)
+      "@tanstack/form-devtools": 0.2.1(@types/react@19.2.4)(csstype@3.2.0)(react@19.2.0)(solid-js@1.9.10)
+      react: 19.2.0
+    transitivePeerDependencies:
+      - "@types/react"
+      - csstype
+      - solid-js
+
+  "@tanstack/react-form@1.25.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)":
+    dependencies:
+      "@tanstack/form-core": 1.25.0
+      "@tanstack/react-store": 0.7.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      react: 19.2.0
+    transitivePeerDependencies:
+      - react-dom
 
   "@tanstack/react-query-devtools@5.90.2(@tanstack/react-query@5.90.9(react@19.2.0))(react@19.2.0)":
     dependencies:
@@ -3303,6 +3461,13 @@ snapshots:
       react-dom: 19.2.0(react@19.2.0)
       tiny-invariant: 1.3.3
       tiny-warning: 1.0.3
+
+  "@tanstack/react-store@0.7.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)":
+    dependencies:
+      "@tanstack/store": 0.7.7
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+      use-sync-external-store: 1.6.0(react@19.2.0)
 
   "@tanstack/react-store@0.8.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)":
     dependencies:
@@ -3391,6 +3556,8 @@ snapshots:
       tinyglobby: 0.2.15
     transitivePeerDependencies:
       - supports-color
+
+  "@tanstack/store@0.7.7": {}
 
   "@tanstack/store@0.8.0": {}
 
@@ -3572,6 +3739,16 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
+  arkregex@0.0.2:
+    dependencies:
+      "@ark/util": 0.53.0
+
+  arktype@2.1.26:
+    dependencies:
+      "@ark/schema": 0.54.0
+      "@ark/util": 0.54.0
+      arkregex: 0.0.2
+
   ast-types@0.16.1:
     dependencies:
       tslib: 2.8.1
@@ -3666,6 +3843,8 @@ snapshots:
       which: 2.0.2
 
   csstype@3.2.0: {}
+
+  dayjs@1.11.19: {}
 
   debug@4.4.3(supports-color@10.2.2):
     dependencies:

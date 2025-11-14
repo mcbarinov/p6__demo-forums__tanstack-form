@@ -8,103 +8,90 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as AuthRouteRouteImport } from './routes/_auth/route'
-import { Route as AuthIndexRouteImport } from './routes/_auth/index'
-import { Route as AuthForumsNewRouteImport } from './routes/_auth/forums/new'
-import { Route as AuthForumsSlugIndexRouteImport } from './routes/_auth/forums/$slug/index'
-import { Route as AuthForumsSlugNewRouteImport } from './routes/_auth/forums/$slug/new'
-import { Route as AuthForumsSlugPostNumberIndexRouteImport } from './routes/_auth/forums/$slug/$postNumber/index'
+import { Route as rootRouteImport } from "./routes/__root"
+import { Route as LoginRouteImport } from "./routes/login"
+import { Route as AuthRouteRouteImport } from "./routes/_auth/route"
+import { Route as AuthIndexRouteImport } from "./routes/_auth/index"
+import { Route as AuthForumsNewRouteImport } from "./routes/_auth/forums/new"
+import { Route as AuthForumsSlugIndexRouteImport } from "./routes/_auth/forums/$slug/index"
+import { Route as AuthForumsSlugNewRouteImport } from "./routes/_auth/forums/$slug/new"
+import { Route as AuthForumsSlugPostNumberIndexRouteImport } from "./routes/_auth/forums/$slug/$postNumber/index"
 
 const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
+  id: "/login",
+  path: "/login",
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRouteRoute = AuthRouteRouteImport.update({
-  id: '/_auth',
+  id: "/_auth",
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthIndexRoute = AuthIndexRouteImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => AuthRouteRoute,
 } as any)
 const AuthForumsNewRoute = AuthForumsNewRouteImport.update({
-  id: '/forums/new',
-  path: '/forums/new',
+  id: "/forums/new",
+  path: "/forums/new",
   getParentRoute: () => AuthRouteRoute,
 } as any)
 const AuthForumsSlugIndexRoute = AuthForumsSlugIndexRouteImport.update({
-  id: '/forums/$slug/',
-  path: '/forums/$slug/',
+  id: "/forums/$slug/",
+  path: "/forums/$slug/",
   getParentRoute: () => AuthRouteRoute,
 } as any)
 const AuthForumsSlugNewRoute = AuthForumsSlugNewRouteImport.update({
-  id: '/forums/$slug/new',
-  path: '/forums/$slug/new',
+  id: "/forums/$slug/new",
+  path: "/forums/$slug/new",
   getParentRoute: () => AuthRouteRoute,
 } as any)
-const AuthForumsSlugPostNumberIndexRoute =
-  AuthForumsSlugPostNumberIndexRouteImport.update({
-    id: '/forums/$slug/$postNumber/',
-    path: '/forums/$slug/$postNumber/',
-    getParentRoute: () => AuthRouteRoute,
-  } as any)
+const AuthForumsSlugPostNumberIndexRoute = AuthForumsSlugPostNumberIndexRouteImport.update({
+  id: "/forums/$slug/$postNumber/",
+  path: "/forums/$slug/$postNumber/",
+  getParentRoute: () => AuthRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/login': typeof LoginRoute
-  '/': typeof AuthIndexRoute
-  '/forums/new': typeof AuthForumsNewRoute
-  '/forums/$slug/new': typeof AuthForumsSlugNewRoute
-  '/forums/$slug': typeof AuthForumsSlugIndexRoute
-  '/forums/$slug/$postNumber': typeof AuthForumsSlugPostNumberIndexRoute
+  "/login": typeof LoginRoute
+  "/": typeof AuthIndexRoute
+  "/forums/new": typeof AuthForumsNewRoute
+  "/forums/$slug/new": typeof AuthForumsSlugNewRoute
+  "/forums/$slug": typeof AuthForumsSlugIndexRoute
+  "/forums/$slug/$postNumber": typeof AuthForumsSlugPostNumberIndexRoute
 }
 export interface FileRoutesByTo {
-  '/login': typeof LoginRoute
-  '/': typeof AuthIndexRoute
-  '/forums/new': typeof AuthForumsNewRoute
-  '/forums/$slug/new': typeof AuthForumsSlugNewRoute
-  '/forums/$slug': typeof AuthForumsSlugIndexRoute
-  '/forums/$slug/$postNumber': typeof AuthForumsSlugPostNumberIndexRoute
+  "/login": typeof LoginRoute
+  "/": typeof AuthIndexRoute
+  "/forums/new": typeof AuthForumsNewRoute
+  "/forums/$slug/new": typeof AuthForumsSlugNewRoute
+  "/forums/$slug": typeof AuthForumsSlugIndexRoute
+  "/forums/$slug/$postNumber": typeof AuthForumsSlugPostNumberIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_auth': typeof AuthRouteRouteWithChildren
-  '/login': typeof LoginRoute
-  '/_auth/': typeof AuthIndexRoute
-  '/_auth/forums/new': typeof AuthForumsNewRoute
-  '/_auth/forums/$slug/new': typeof AuthForumsSlugNewRoute
-  '/_auth/forums/$slug/': typeof AuthForumsSlugIndexRoute
-  '/_auth/forums/$slug/$postNumber/': typeof AuthForumsSlugPostNumberIndexRoute
+  "/_auth": typeof AuthRouteRouteWithChildren
+  "/login": typeof LoginRoute
+  "/_auth/": typeof AuthIndexRoute
+  "/_auth/forums/new": typeof AuthForumsNewRoute
+  "/_auth/forums/$slug/new": typeof AuthForumsSlugNewRoute
+  "/_auth/forums/$slug/": typeof AuthForumsSlugIndexRoute
+  "/_auth/forums/$slug/$postNumber/": typeof AuthForumsSlugPostNumberIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/login'
-    | '/'
-    | '/forums/new'
-    | '/forums/$slug/new'
-    | '/forums/$slug'
-    | '/forums/$slug/$postNumber'
+  fullPaths: "/login" | "/" | "/forums/new" | "/forums/$slug/new" | "/forums/$slug" | "/forums/$slug/$postNumber"
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/login'
-    | '/'
-    | '/forums/new'
-    | '/forums/$slug/new'
-    | '/forums/$slug'
-    | '/forums/$slug/$postNumber'
+  to: "/login" | "/" | "/forums/new" | "/forums/$slug/new" | "/forums/$slug" | "/forums/$slug/$postNumber"
   id:
-    | '__root__'
-    | '/_auth'
-    | '/login'
-    | '/_auth/'
-    | '/_auth/forums/new'
-    | '/_auth/forums/$slug/new'
-    | '/_auth/forums/$slug/'
-    | '/_auth/forums/$slug/$postNumber/'
+    | "__root__"
+    | "/_auth"
+    | "/login"
+    | "/_auth/"
+    | "/_auth/forums/new"
+    | "/_auth/forums/$slug/new"
+    | "/_auth/forums/$slug/"
+    | "/_auth/forums/$slug/$postNumber/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -112,54 +99,54 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
 }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
+    "/login": {
+      id: "/login"
+      path: "/login"
+      fullPath: "/login"
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth': {
-      id: '/_auth'
-      path: ''
-      fullPath: ''
+    "/_auth": {
+      id: "/_auth"
+      path: ""
+      fullPath: ""
       preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/': {
-      id: '/_auth/'
-      path: '/'
-      fullPath: '/'
+    "/_auth/": {
+      id: "/_auth/"
+      path: "/"
+      fullPath: "/"
       preLoaderRoute: typeof AuthIndexRouteImport
       parentRoute: typeof AuthRouteRoute
     }
-    '/_auth/forums/new': {
-      id: '/_auth/forums/new'
-      path: '/forums/new'
-      fullPath: '/forums/new'
+    "/_auth/forums/new": {
+      id: "/_auth/forums/new"
+      path: "/forums/new"
+      fullPath: "/forums/new"
       preLoaderRoute: typeof AuthForumsNewRouteImport
       parentRoute: typeof AuthRouteRoute
     }
-    '/_auth/forums/$slug/': {
-      id: '/_auth/forums/$slug/'
-      path: '/forums/$slug'
-      fullPath: '/forums/$slug'
+    "/_auth/forums/$slug/": {
+      id: "/_auth/forums/$slug/"
+      path: "/forums/$slug"
+      fullPath: "/forums/$slug"
       preLoaderRoute: typeof AuthForumsSlugIndexRouteImport
       parentRoute: typeof AuthRouteRoute
     }
-    '/_auth/forums/$slug/new': {
-      id: '/_auth/forums/$slug/new'
-      path: '/forums/$slug/new'
-      fullPath: '/forums/$slug/new'
+    "/_auth/forums/$slug/new": {
+      id: "/_auth/forums/$slug/new"
+      path: "/forums/$slug/new"
+      fullPath: "/forums/$slug/new"
       preLoaderRoute: typeof AuthForumsSlugNewRouteImport
       parentRoute: typeof AuthRouteRoute
     }
-    '/_auth/forums/$slug/$postNumber/': {
-      id: '/_auth/forums/$slug/$postNumber/'
-      path: '/forums/$slug/$postNumber'
-      fullPath: '/forums/$slug/$postNumber'
+    "/_auth/forums/$slug/$postNumber/": {
+      id: "/_auth/forums/$slug/$postNumber/"
+      path: "/forums/$slug/$postNumber"
+      fullPath: "/forums/$slug/$postNumber"
       preLoaderRoute: typeof AuthForumsSlugPostNumberIndexRouteImport
       parentRoute: typeof AuthRouteRoute
     }
@@ -182,14 +169,10 @@ const AuthRouteRouteChildren: AuthRouteRouteChildren = {
   AuthForumsSlugPostNumberIndexRoute: AuthForumsSlugPostNumberIndexRoute,
 }
 
-const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
-  AuthRouteRouteChildren,
-)
+const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(AuthRouteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   AuthRouteRoute: AuthRouteRouteWithChildren,
   LoginRoute: LoginRoute,
 }
-export const routeTree = rootRouteImport
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>()
