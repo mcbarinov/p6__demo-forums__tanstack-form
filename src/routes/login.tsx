@@ -1,86 +1,94 @@
-import { z } from "zod"
 import { type } from "arktype"
-import { useForm } from "react-hook-form"
+import { useForm } from "@tanstack/react-form"
 import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { FieldError } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { ErrorMessage } from "@/components/shared/ErrorMessage"
 import { toast } from "sonner"
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import { api } from "@/lib/api"
-import { AppError } from "@/lib/errors"
 
 export const Route = createFileRoute("/login")({
   validateSearch: type({
     redirect: "string?",
   }),
-  component: RouteComponent,
+  component: LoginPage,
 })
 
-const formSchema = z.object({
-  username: z.string().min(2).max(100),
-  password: z.string().min(2).max(100),
-})
-
-type LoginForm = z.infer<typeof formSchema>
-
-function RouteComponent() {
+function LoginPage() {
   const navigate = useNavigate()
   const { redirect } = Route.useSearch()
   const loginMutation = api.mutations.useLogin()
 
-  const form = useForm<LoginForm>({ resolver: zodResolver(formSchema), defaultValues: { username: "", password: "" } })
-
-  const onSubmit = (data: LoginForm) => {
-    loginMutation.mutate(data, {
-      onSuccess: () => {
-        toast.success("Logged in successfully")
-        void navigate({ to: redirect ?? "/" })
-      },
-    })
-  }
+  const form = useForm({
+    defaultValues: { username: "", password: "" },
+    validators: {
+      onSubmit: type({
+        username: "2 <= string <= 100",
+        password: "2 <= string <= 100",
+      }),
+    },
+    onSubmit: ({ value }) => {
+      loginMutation.mutate(value, {
+        onSuccess: () => {
+          toast.success("Logged in successfully")
+          void navigate({ to: redirect ?? "/" })
+        },
+      })
+    },
+  })
 
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="border rounded p-6 w-80">
         <h1 className="text-xl font-bold mb-4">DemoForums</h1>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input {...field} placeholder="username" autoFocus />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input {...field} type="password" placeholder="password" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {loginMutation.error && (
-              <div className="text-sm text-red-600">{AppError.fromUnknown(loginMutation.error).message}</div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            void form.handleSubmit()
+          }}
+          className="flex flex-col gap-4"
+        >
+          <form.Field
+            name="username"
+            children={(field) => (
+              <>
+                <Input
+                  value={field.state.value}
+                  onChange={(e) => {
+                    field.handleChange(e.target.value)
+                  }}
+                  placeholder="username"
+                  autoFocus
+                />
+                <FieldError errors={field.state.meta.errors} />
+              </>
             )}
+          />
 
-            <Button type="submit" disabled={loginMutation.isPending}>
-              {loginMutation.isPending ? "Logging in..." : "Login"}
-            </Button>
-          </form>
-        </Form>
+          <form.Field
+            name="password"
+            children={(field) => (
+              <>
+                <Input
+                  type="password"
+                  value={field.state.value}
+                  onChange={(e) => {
+                    field.handleChange(e.target.value)
+                  }}
+                  placeholder="password"
+                />
+                <FieldError errors={field.state.meta.errors} />
+              </>
+            )}
+          />
+
+          {loginMutation.error && <ErrorMessage error={loginMutation.error} />}
+
+          <Button type="submit" disabled={loginMutation.isPending}>
+            {loginMutation.isPending ? "Logging in..." : "Login"}
+          </Button>
+        </form>
       </div>
     </div>
   )
