@@ -1,6 +1,5 @@
 import { type } from "arktype"
 import { useAppForm } from "@/hooks/useAppForm"
-import { Button } from "@/components/ui/button"
 import { ErrorMessage } from "@/components/shared/ErrorMessage"
 import { toast } from "sonner"
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
@@ -50,9 +49,9 @@ function LoginPage() {
           <form.AppField name="username" children={(field) => <field.TextField placeholder="username" autoFocus />} />
           <form.AppField name="password" children={(field) => <field.TextField placeholder="password" type="password" />} />
           {loginMutation.error && <ErrorMessage error={loginMutation.error} />}
-          <Button type="submit" disabled={loginMutation.isPending}>
-            {loginMutation.isPending ? "Logging in..." : "Login"}
-          </Button>
+          <form.SubmitButton mutation={loginMutation} pendingText="Logging in...">
+            Login
+          </form.SubmitButton>
         </form>
       </div>
     </div>

@@ -1,14 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { type } from "arktype"
 import { useAppForm } from "@/hooks/useAppForm"
-import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 
 import { api } from "@/lib/api"
 import { useForum } from "@/hooks/useCache"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ErrorMessage } from "@/components/shared/ErrorMessage"
+import { CancelButton } from "@/components/form/CancelButton"
 
 export const Route = createFileRoute("/_auth/forums/$slug/new")({
   component: RouteComponent,
@@ -87,13 +86,8 @@ function RouteComponent() {
             {createPostMutation.error && <ErrorMessage error={createPostMutation.error} />}
 
             <div className="flex gap-2">
-              <Button type="submit" disabled={createPostMutation.isPending}>
-                {createPostMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Create Post
-              </Button>
-              <Button type="button" variant="outline" onClick={() => void navigate({ to: "/forums/$slug", params: { slug } })}>
-                Back to Forum
-              </Button>
+              <form.SubmitButton mutation={createPostMutation}>Create Post</form.SubmitButton>
+              <CancelButton onClick={() => void navigate({ to: "/forums/$slug", params: { slug } })}>Back to Forum</CancelButton>
             </div>
           </form>
         </CardContent>

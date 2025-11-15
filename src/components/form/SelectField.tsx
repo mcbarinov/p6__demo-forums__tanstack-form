@@ -2,17 +2,14 @@ import { useFieldContext } from "@/hooks/useAppForm"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { FieldError } from "@/components/ui/field"
 
-export function SelectField({
-  label,
-  placeholder,
-  options,
-  disabled,
-}: {
+export interface SelectFieldProps {
   label?: string
   placeholder?: string
   options: { value: string; label: string }[]
   disabled?: boolean
-}) {
+}
+
+export function SelectField({ label, placeholder, options, disabled }: SelectFieldProps) {
   const field = useFieldContext<string>()
 
   return (

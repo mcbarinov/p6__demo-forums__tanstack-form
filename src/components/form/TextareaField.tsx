@@ -2,19 +2,15 @@ import { useFieldContext } from "@/hooks/useAppForm"
 import { Textarea } from "@/components/ui/textarea"
 import { FieldError } from "@/components/ui/field"
 
-export function TextareaField({
-  label,
-  placeholder,
-  rows = 4,
-  autoFocus,
-  disabled,
-}: {
+export interface TextareaFieldProps {
   label?: string
   placeholder?: string
   rows?: number
   autoFocus?: boolean
   disabled?: boolean
-}) {
+}
+
+export function TextareaField({ label, placeholder, rows = 4, autoFocus, disabled }: TextareaFieldProps) {
   const field = useFieldContext<string>()
 
   return (

@@ -1,7 +1,6 @@
 import { type } from "arktype"
 import { useAppForm } from "@/hooks/useAppForm"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { ErrorMessage } from "@/components/shared/ErrorMessage"
 import { api } from "@/lib/api"
@@ -86,9 +85,9 @@ export function ChangePasswordDialog({ open, onOpenChange }: { open: boolean; on
           {changePasswordMutation.error && <ErrorMessage error={changePasswordMutation.error} />}
 
           <DialogFooter>
-            <Button type="submit" disabled={changePasswordMutation.isPending}>
-              {changePasswordMutation.isPending ? "Changing..." : "Change Password"}
-            </Button>
+            <form.SubmitButton mutation={changePasswordMutation} pendingText="Changing...">
+              Change Password
+            </form.SubmitButton>
           </DialogFooter>
         </form>
       </DialogContent>

@@ -2,8 +2,6 @@ import { type } from "arktype"
 import { useAppForm } from "@/hooks/useAppForm"
 import { api } from "@/lib/api"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import { ErrorMessage } from "@/components/shared/ErrorMessage"
 
@@ -59,10 +57,9 @@ export function CommentForm({ slug, postNumber }: { slug: string; postNumber: st
           <form.Subscribe
             selector={(state) => state.values.content}
             children={(content) => (
-              <Button type="submit" disabled={createCommentMutation.isPending || !content.trim()}>
-                {createCommentMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              <form.SubmitButton mutation={createCommentMutation} disabled={!content.trim()}>
                 Post Comment
-              </Button>
+              </form.SubmitButton>
             )}
           />
         </form>

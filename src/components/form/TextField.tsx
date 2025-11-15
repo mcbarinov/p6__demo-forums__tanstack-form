@@ -2,19 +2,15 @@ import { useFieldContext } from "@/hooks/useAppForm"
 import { Input } from "@/components/ui/input"
 import { FieldError } from "@/components/ui/field"
 
-export function TextField({
-  label,
-  placeholder,
-  type = "text",
-  autoFocus,
-  disabled,
-}: {
+export interface TextFieldProps {
   label?: string
   placeholder?: string
   type?: "text" | "password" | "email"
   autoFocus?: boolean
   disabled?: boolean
-}) {
+}
+
+export function TextField({ label, placeholder, type = "text", autoFocus, disabled }: TextFieldProps) {
   const field = useFieldContext<string>()
 
   return (
