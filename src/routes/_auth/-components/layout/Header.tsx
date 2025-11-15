@@ -18,18 +18,6 @@ export default function Header() {
   const navigate = useNavigate()
   const [passwordDialogOpen, setPasswordDialogOpen] = useState(false)
 
-  const handleLogout = () => {
-    logoutMutation.mutate(undefined, {
-      onSuccess: () => {
-        void navigate({ to: "/login" })
-      },
-    })
-  }
-
-  const handleChangePassword = () => {
-    setPasswordDialogOpen(true)
-  }
-
   return (
     <header className="py-4 border-b flex items-center justify-between">
       <Link to="/" className="text-2xl font-bold">
@@ -54,12 +42,22 @@ export default function Header() {
               Create Forum
             </DropdownMenuItem>
           )}
-          <DropdownMenuItem onClick={handleChangePassword}>
+          <DropdownMenuItem
+            onClick={() => {
+              setPasswordDialogOpen(true)
+            }}
+          >
             <LockIcon className="mr-2 h-4 w-4" />
             Change Password
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              logoutMutation.mutate(undefined)
+            }}
+          >
+            Logout
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 

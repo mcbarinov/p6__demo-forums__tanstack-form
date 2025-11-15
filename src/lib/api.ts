@@ -152,10 +152,11 @@ export const api = {
 
       return useMutation({
         mutationFn: () => httpClient.post("api/auth/logout"),
-        onSuccess: () => {
+        onSuccess: async () => {
           // Cookie is cleared automatically by the server
-          // Remove currentUser from cache to force fresh fetch on next login
-          queryClient.removeQueries({ queryKey: ["currentUser"] })
+          // Navigate to login first, then clear cache to avoid refetch during navigation
+          await router.navigate({ to: "/login" })
+          queryClient.clear()
         },
       })
     },
