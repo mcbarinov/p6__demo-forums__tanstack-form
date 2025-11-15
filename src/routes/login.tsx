@@ -1,8 +1,6 @@
 import { type } from "arktype"
-import { useForm } from "@tanstack/react-form"
+import { useAppForm } from "@/hooks/useAppForm"
 import { Button } from "@/components/ui/button"
-import { FieldError } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
 import { ErrorMessage } from "@/components/shared/ErrorMessage"
 import { toast } from "sonner"
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
@@ -20,7 +18,7 @@ function LoginPage() {
   const { redirect } = Route.useSearch()
   const loginMutation = api.mutations.useLogin()
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues: { username: "", password: "" },
     validators: {
       onSubmit: type({
@@ -49,39 +47,9 @@ function LoginPage() {
           }}
           className="flex flex-col gap-4"
         >
-          <form.Field
-            name="username"
-            children={(field) => (
-              <>
-                <Input
-                  value={field.state.value}
-                  onChange={(e) => {
-                    field.handleChange(e.target.value)
-                  }}
-                  placeholder="username"
-                  autoFocus
-                />
-                <FieldError errors={field.state.meta.errors} />
-              </>
-            )}
-          />
+          <form.AppField name="username" children={(field) => <field.TextField placeholder="username" autoFocus />} />
 
-          <form.Field
-            name="password"
-            children={(field) => (
-              <>
-                <Input
-                  type="password"
-                  value={field.state.value}
-                  onChange={(e) => {
-                    field.handleChange(e.target.value)
-                  }}
-                  placeholder="password"
-                />
-                <FieldError errors={field.state.meta.errors} />
-              </>
-            )}
-          />
+          <form.AppField name="password" children={(field) => <field.TextField placeholder="password" type="password" />} />
 
           {loginMutation.error && <ErrorMessage error={loginMutation.error} />}
 
