@@ -1,16 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { type } from "arktype"
-import { useForm } from "@tanstack/react-form"
+import { useAppForm } from "@/hooks/useAppForm"
 import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 
 import { api } from "@/lib/api"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { FieldError } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ErrorMessage } from "@/components/shared/ErrorMessage"
 
 export const Route = createFileRoute("/_auth/forums/new")({
@@ -21,7 +17,7 @@ function RouteComponent() {
   const navigate = Route.useNavigate()
   const createForumMutation = api.mutations.useCreateForum()
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues: {
       title: "",
       slug: "",
@@ -60,80 +56,27 @@ function RouteComponent() {
             }}
             className="space-y-4"
           >
-            <form.Field
-              name="title"
-              children={(field) => (
-                <div>
-                  <label className="text-sm font-medium">Title</label>
-                  <Input
-                    value={field.state.value}
-                    onChange={(e) => {
-                      field.handleChange(e.target.value)
-                    }}
-                    placeholder="Enter forum title"
-                  />
-                  <FieldError errors={field.state.meta.errors} />
-                </div>
-              )}
-            />
+            <form.AppField name="title" children={(field) => <field.TextField label="Title" placeholder="Enter forum title" />} />
 
-            <form.Field
-              name="slug"
-              children={(field) => (
-                <div>
-                  <label className="text-sm font-medium">Slug</label>
-                  <Input
-                    value={field.state.value}
-                    onChange={(e) => {
-                      field.handleChange(e.target.value)
-                    }}
-                    placeholder="forum-url-slug"
-                  />
-                  <FieldError errors={field.state.meta.errors} />
-                </div>
-              )}
-            />
+            <form.AppField name="slug" children={(field) => <field.TextField label="Slug" placeholder="forum-url-slug" />} />
 
-            <form.Field
+            <form.AppField
               name="description"
-              children={(field) => (
-                <div>
-                  <label className="text-sm font-medium">Description</label>
-                  <Textarea
-                    value={field.state.value}
-                    onChange={(e) => {
-                      field.handleChange(e.target.value)
-                    }}
-                    placeholder="Describe your forum..."
-                    rows={4}
-                  />
-                  <FieldError errors={field.state.meta.errors} />
-                </div>
-              )}
+              children={(field) => <field.TextareaField label="Description" placeholder="Describe your forum..." rows={4} />}
             />
 
-            <form.Field
+            <form.AppField
               name="category"
               children={(field) => (
-                <div>
-                  <label className="text-sm font-medium">Category</label>
-                  <Select
-                    onValueChange={(value) => {
-                      field.handleChange(value as "Technology" | "Science" | "Art")
-                    }}
-                    value={field.state.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a category" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Technology">Technology</SelectItem>
-                      <SelectItem value="Science">Science</SelectItem>
-                      <SelectItem value="Art">Art</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FieldError errors={field.state.meta.errors} />
-                </div>
+                <field.SelectField
+                  label="Category"
+                  placeholder="Select a category"
+                  options={[
+                    { value: "Technology", label: "Technology" },
+                    { value: "Science", label: "Science" },
+                    { value: "Art", label: "Art" },
+                  ]}
+                />
               )}
             />
 

@@ -1,10 +1,8 @@
 import { type } from "arktype"
-import { useForm } from "@tanstack/react-form"
+import { useAppForm } from "@/hooks/useAppForm"
 import { api } from "@/lib/api"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { FieldError } from "@/components/ui/field"
-import { Textarea } from "@/components/ui/textarea"
 import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import { ErrorMessage } from "@/components/shared/ErrorMessage"
@@ -12,7 +10,7 @@ import { ErrorMessage } from "@/components/shared/ErrorMessage"
 export function CommentForm({ slug, postNumber }: { slug: string; postNumber: string }) {
   const createCommentMutation = api.mutations.useCreateComment()
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues: {
       content: "",
     },
@@ -51,21 +49,10 @@ export function CommentForm({ slug, postNumber }: { slug: string; postNumber: st
           }}
           className="space-y-4"
         >
-          <form.Field
+          <form.AppField
             name="content"
             children={(field) => (
-              <div>
-                <Textarea
-                  value={field.state.value}
-                  onChange={(e) => {
-                    field.handleChange(e.target.value)
-                  }}
-                  placeholder="Share your thoughts..."
-                  rows={3}
-                  disabled={createCommentMutation.isPending}
-                />
-                <FieldError errors={field.state.meta.errors} />
-              </div>
+              <field.TextareaField placeholder="Share your thoughts..." rows={3} disabled={createCommentMutation.isPending} />
             )}
           />
           {createCommentMutation.error && <ErrorMessage error={createCommentMutation.error} />}

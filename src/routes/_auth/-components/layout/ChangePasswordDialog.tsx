@@ -1,9 +1,7 @@
 import { type } from "arktype"
-import { useForm } from "@tanstack/react-form"
+import { useAppForm } from "@/hooks/useAppForm"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { FieldError } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
 import { ErrorMessage } from "@/components/shared/ErrorMessage"
 import { api } from "@/lib/api"
@@ -11,7 +9,7 @@ import { api } from "@/lib/api"
 export function ChangePasswordDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   const changePasswordMutation = api.mutations.useChangePassword()
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues: {
       currentPassword: "",
       newPassword: "",
@@ -64,41 +62,14 @@ export function ChangePasswordDialog({ open, onOpenChange }: { open: boolean; on
           }}
           className="space-y-4"
         >
-          <form.Field
+          <form.AppField
             name="currentPassword"
-            children={(field) => (
-              <div>
-                <label className="text-sm font-medium">Current Password</label>
-                <Input
-                  value={field.state.value}
-                  onChange={(e) => {
-                    field.handleChange(e.target.value)
-                  }}
-                  type="password"
-                />
-                <FieldError errors={field.state.meta.errors} />
-              </div>
-            )}
+            children={(field) => <field.TextField label="Current Password" type="password" />}
           />
 
-          <form.Field
-            name="newPassword"
-            children={(field) => (
-              <div>
-                <label className="text-sm font-medium">New Password</label>
-                <Input
-                  value={field.state.value}
-                  onChange={(e) => {
-                    field.handleChange(e.target.value)
-                  }}
-                  type="password"
-                />
-                <FieldError errors={field.state.meta.errors} />
-              </div>
-            )}
-          />
+          <form.AppField name="newPassword" children={(field) => <field.TextField label="New Password" type="password" />} />
 
-          <form.Field
+          <form.AppField
             name="confirmPassword"
             validators={{
               onChange: ({ value, fieldApi }) => {
@@ -109,19 +80,7 @@ export function ChangePasswordDialog({ open, onOpenChange }: { open: boolean; on
                 return undefined
               },
             }}
-            children={(field) => (
-              <div>
-                <label className="text-sm font-medium">Confirm New Password</label>
-                <Input
-                  value={field.state.value}
-                  onChange={(e) => {
-                    field.handleChange(e.target.value)
-                  }}
-                  type="password"
-                />
-                <FieldError errors={field.state.meta.errors} />
-              </div>
-            )}
+            children={(field) => <field.TextField label="Confirm New Password" type="password" />}
           />
 
           {changePasswordMutation.error && <ErrorMessage error={changePasswordMutation.error} />}

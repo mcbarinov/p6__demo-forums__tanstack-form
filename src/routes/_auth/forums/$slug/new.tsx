@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { type } from "arktype"
-import { useForm } from "@tanstack/react-form"
+import { useAppForm } from "@/hooks/useAppForm"
 import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 
@@ -8,9 +8,6 @@ import { api } from "@/lib/api"
 import { useForum } from "@/hooks/useCache"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { FieldError } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { ErrorMessage } from "@/components/shared/ErrorMessage"
 
 export const Route = createFileRoute("/_auth/forums/$slug/new")({
@@ -23,7 +20,7 @@ function RouteComponent() {
   const forum = useForum(slug)
   const createPostMutation = api.mutations.useCreatePost()
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues: {
       title: "",
       content: "",
@@ -75,56 +72,16 @@ function RouteComponent() {
             }}
             className="space-y-4"
           >
-            <form.Field
-              name="title"
-              children={(field) => (
-                <div>
-                  <label className="text-sm font-medium">Title</label>
-                  <Input
-                    value={field.state.value}
-                    onChange={(e) => {
-                      field.handleChange(e.target.value)
-                    }}
-                    placeholder="Enter post title"
-                  />
-                  <FieldError errors={field.state.meta.errors} />
-                </div>
-              )}
-            />
+            <form.AppField name="title" children={(field) => <field.TextField label="Title" placeholder="Enter post title" />} />
 
-            <form.Field
+            <form.AppField
               name="content"
-              children={(field) => (
-                <div>
-                  <label className="text-sm font-medium">Content</label>
-                  <Textarea
-                    value={field.state.value}
-                    onChange={(e) => {
-                      field.handleChange(e.target.value)
-                    }}
-                    placeholder="Write your post content..."
-                    rows={10}
-                  />
-                  <FieldError errors={field.state.meta.errors} />
-                </div>
-              )}
+              children={(field) => <field.TextareaField label="Content" placeholder="Write your post content..." rows={10} />}
             />
 
-            <form.Field
+            <form.AppField
               name="tags"
-              children={(field) => (
-                <div>
-                  <label className="text-sm font-medium">Tags (optional)</label>
-                  <Input
-                    value={field.state.value}
-                    onChange={(e) => {
-                      field.handleChange(e.target.value)
-                    }}
-                    placeholder="Enter tags separated by commas"
-                  />
-                  <FieldError errors={field.state.meta.errors} />
-                </div>
-              )}
+              children={(field) => <field.TextField label="Tags (optional)" placeholder="Enter tags separated by commas" />}
             />
 
             {createPostMutation.error && <ErrorMessage error={createPostMutation.error} />}

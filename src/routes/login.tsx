@@ -48,11 +48,8 @@ function LoginPage() {
           className="flex flex-col gap-4"
         >
           <form.AppField name="username" children={(field) => <field.TextField placeholder="username" autoFocus />} />
-
           <form.AppField name="password" children={(field) => <field.TextField placeholder="password" type="password" />} />
-
           {loginMutation.error && <ErrorMessage error={loginMutation.error} />}
-
           <Button type="submit" disabled={loginMutation.isPending}>
             {loginMutation.isPending ? "Logging in..." : "Login"}
           </Button>
