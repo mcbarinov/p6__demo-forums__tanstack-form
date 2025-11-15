@@ -1,13 +1,4 @@
-## ⚠️ IMPORTANT
-
-This repository is cloned from [p4**demo-forums**tanstack-router](https://github.com/mcbarinov/p4__demo-forums__tanstack-router).
-
-The goal of this repository is to implement the same functionality using different libraries:
-
-- **TanStack Form** instead of React Hook Form for form handling
-- **ArkType** instead of Zod for schema validation
-
-# Demo Forums - TanStack Router
+# Demo Forums - TanStack Router + TanStack Form
 
 Demo project for developing and testing good architectural approaches for future projects.
 
@@ -32,7 +23,7 @@ src/
 - TypeScript 5.9
 - TanStack Router 1.135
 - TanStack Query 5.90
-- React Hook Form + Zod
+- TanStack Form + ArkType
 - Tailwind CSS 4
 - shadcn/ui
 
@@ -45,7 +36,7 @@ src/
 - Routes defined in `src/routes/` directory with auto-generated route tree
 - Layout routes for shared logic (`_auth/route.tsx` - authentication guard)
 - Data preloading via `loader` function - ensures data is ready before component renders
-- Search params validation with Zod for type-safe URL state
+- Search params validation with ArkType for type-safe URL state
 - Route-scoped components in `-components/` directories for better organization
 
 **Key pattern - Protected routes:**
@@ -197,7 +188,7 @@ throw new AppError("not_found", "User not found")
 **End-to-end type safety:**
 
 - OpenAPI types auto-generated from backend (`pnpm run generate-types`)
-- Zod schemas for runtime validation (forms, search params, API responses)
+- ArkType schemas for runtime validation (forms, search params, API responses)
 - Strict TypeScript configuration (strict mode + all strict checks enabled)
 - Type-safe routing with full inference for params, search, and context
 - `as const` assertions for precise query key types
@@ -213,9 +204,70 @@ import type { User, Forum, Post } from "@/types"
 
 ## Related Projects
 
-- **Original Project**: [p4**demo-forums**tanstack-router](https://github.com/mcbarinov/p4__demo-forums__tanstack-router) - TanStack Router version with React Hook Form and Zod
+- **Original Project**: [p4**demo-forums**tanstack-router](https://github.com/mcbarinov/p4__demo-forums__tanstack-router) - Original TanStack Router version with React Hook Form and Zod (this project is a fork with TanStack Form + ArkType)
 - **Backend API**: [p1**demo-forums**api](https://github.com/mcbarinov/p1__demo-forums__api) - FastAPI backend with in-memory storage
 - **React Router Version**: [p2**demo-forums**react-router](https://github.com/mcbarinov/p2__demo-forums__react-router) - Same app built with React Router instead of TanStack Router
+
+## Project Setup from Scratch
+
+This section describes how to create a similar project from scratch using the TanStack ecosystem.
+
+### 1. Create Vite Project
+
+```bash
+pnpm create vite@latest -t react-ts .
+```
+
+### 2. Install Dependencies
+
+**Core dependencies:**
+
+```bash
+pnpm add ky @tanstack/react-router @tanstack/react-query @tanstack/react-form @tanstack/react-form-devtools arktype
+```
+
+**Dev dependencies:**
+
+```bash
+pnpm add -D @tanstack/router-plugin prettier eslint-config-prettier eslint-plugin-react-x eslint-plugin-react-dom @types/node
+```
+
+### 3. Setup Tailwind CSS
+
+Note: Install Tailwind CSS as a regular dependency (not dev dependency) for Tailwind CSS 4:
+
+```bash
+pnpm add tailwindcss @tailwindcss/vite
+echo '@import "tailwindcss";' > src/index.css
+```
+
+### 4. Setup shadcn/ui
+
+```bash
+pnpm dlx shadcn@latest init
+pnpm dlx shadcn@latest add dropdown-menu card table field button textarea input select sonner badge pagination alert dialog
+```
+
+### 5. Configuration Files
+
+Copy the following configuration files from this repository to your project:
+
+- `vite.config.ts` - Vite configuration with TanStack Router plugin, Tailwind CSS, and path aliases
+- `tsconfig.json` - Root TypeScript config with path aliases
+- `tsconfig.app.json` - App-specific TypeScript config with strict mode enabled
+- `tsconfig.node.json` - Node-specific TypeScript config
+- `eslint.config.js` - ESLint config with TanStack Query plugin and strict rules
+- `.prettierrc` - Prettier formatting rules
+- `components.json` - shadcn/ui configuration
+
+### 6. Key Points
+
+- **TanStack Router Plugin**: Enables file-based routing with auto-generated route tree
+- **Path Aliases**: `@/*` maps to `src/*` for cleaner imports
+- **Tailwind CSS 4**: Installed as regular dependency, integrated via Vite plugin
+- **TypeScript Strict Mode**: All strict checks enabled for maximum type safety
+- **ESLint**: Configured with TanStack Query plugin and strict TypeScript rules
+- **shadcn/ui**: Using "new-york" style with neutral base color
 
 ## Getting Started
 
