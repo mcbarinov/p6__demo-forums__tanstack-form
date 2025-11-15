@@ -48,6 +48,7 @@ export default defineConfig([
       "react-x/no-context-provider": "off",
       "react-x/no-use-context": "off",
       "react-x/no-unstable-context-value": "off",
+      "react-x/no-array-index-key": "off",
     },
   },
 ])
