@@ -223,13 +223,19 @@ pnpm create vite@latest -t react-ts .
 **Core dependencies:**
 
 ```bash
-pnpm add ky @tanstack/react-router @tanstack/react-query @tanstack/react-form @tanstack/react-form-devtools arktype
+pnpm add ky @tanstack/react-router @tanstack/react-query @tanstack/react-form arktype
 ```
 
 **Dev dependencies:**
 
 ```bash
 pnpm add -D @tanstack/router-plugin prettier eslint-config-prettier eslint-plugin-react-x eslint-plugin-react-dom @types/node
+```
+
+**Devtools (unified TanStack Devtools for Form, Query, and Router):**
+
+```bash
+pnpm add -D @tanstack/react-devtools @tanstack/devtools-vite @tanstack/react-query-devtools @tanstack/react-router-devtools @tanstack/react-form-devtools
 ```
 
 ### 3. Setup Tailwind CSS
@@ -252,7 +258,7 @@ pnpm dlx shadcn@latest add dropdown-menu card table field button textarea input 
 
 Copy the following configuration files from this repository to your project:
 
-- `vite.config.ts` - Vite configuration with TanStack Router plugin, Tailwind CSS, and path aliases
+- `vite.config.ts` - Vite configuration with TanStack Devtools, Router plugin, Tailwind CSS, and path aliases
 - `tsconfig.json` - Root TypeScript config with path aliases
 - `tsconfig.app.json` - App-specific TypeScript config with strict mode enabled
 - `tsconfig.node.json` - Node-specific TypeScript config
@@ -263,6 +269,7 @@ Copy the following configuration files from this repository to your project:
 ### 6. Key Points
 
 - **TanStack Router Plugin**: Enables file-based routing with auto-generated route tree
+- **Unified TanStack Devtools**: Single devtools component integrating Form, Query, and Router debugging tools
 - **Path Aliases**: `@/*` maps to `src/*` for cleaner imports
 - **Tailwind CSS 4**: Installed as regular dependency, integrated via Vite plugin
 - **TypeScript Strict Mode**: All strict checks enabled for maximum type safety
